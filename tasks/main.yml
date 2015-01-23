@@ -1,0 +1,22 @@
+---
+- name: Install simplebackup
+  git:
+    repo: "{{ simplebackup_repo_url }}"
+    dest: /opt/simplebackup
+    version: "{{ simplebackup_version }}"
+
+- name: Install duplicity
+  action: >
+    {{ ansible_pkg_mgr }}
+    name={{ item }}
+  with_items:
+    - python-boto
+    - duplicity
+
+- name: Apply configuration
+  template:
+    src: settings.j2
+    dest: /opt/simplebackup/etc/settings
+    owner: root
+    group: root
+    mode: 0600

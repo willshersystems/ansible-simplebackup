@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  author: Matt Willsher
+  description: Install and configure our simplebackup scripts
+  company: Willsher Systems
+  license: LGPLv3
+  min_ansible_version: 1.2
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  - name: Amazon
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+dependencies:
+  - role: willshersystems.github
+    when: github_has_run is not defined
+  - role: goozbach.EPEL
+    when: ansible_distribution in [ 'CentOS', 'RedHat' ]

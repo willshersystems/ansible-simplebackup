@@ -1,0 +1,10 @@
+export AWS_ACCESS_KEY_ID={{ simplebackup_s3_key_id | mandatory }}
+export AWS_SECRET_ACCESS_KEY={{ simplebackup_s3_access_key | mandatory }}
+export PASSPHRASE={{ simplebackup_passphrase | mandatory }}
+export BUCKET_NAME={{ simplebackup_s3_bucket_name }}
+
+export FULL_FREQ="{{ simplebackup_full_frequency | default ('2W') }}"
+export NUM_FULL="{{ simplebackup_keep_full | default('1') }}"
+
+export DUPLICITY_ARGS='--s3-use-new-style --no-print-statistics -ve'
+export BACKUP_URI="s3://s3-{{ simplebackup_s3_region | mandatory }}.amazonaws.com/${BUCKET_NAME}/{{ ansible_fqdn | mandatory}}"
